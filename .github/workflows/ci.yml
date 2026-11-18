@@ -18,8 +18,8 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         python: ['3.10', '3.11', '3.12', '3.13']
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - name: Install
         run: |
           uv venv --python ${{ matrix.python }}
@@ -37,8 +37,8 @@ jobs:
     name: Core without optional dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - run: uv venv --python 3.12 && uv pip install -e . pytest
       - name: Import the core with no extras installed
         run: uv run --no-sync python -c "import proxy_pool, proxy_pool.quanticdata; print(proxy_pool.__version__)"
@@ -47,7 +47,7 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - run: uv build
       - run: uvx twine check dist/*
